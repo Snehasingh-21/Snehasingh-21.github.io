@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sneha Singh — Data Engineer · AI/ML · Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0f0f;
+    --ink2: #3a3a3a;
+    --ink3: #6b6b6b;
+    --paper: #f5f2ed;
+    --paper2: #edeae3;
+    --accent: #c84b2f;
+    --accent2: #1a3a5c;
+    --green: #2d6a4f;
+    --border: rgba(15,15,15,0.12);
+    --mono: 'DM Mono', monospace;
+    --serif: 'DM Serif Display', serif;
+    --sans: 'Manrope', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 56px;
+    background: rgba(245,242,237,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--mono); font-size: 13px; color: var(--ink3); letter-spacing: 0.04em; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 13px; color: var(--ink2); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 56px;
+  }
+  .hero-left {
+    padding: 5rem 3rem 4rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero-bio {
+    font-size: 15px;
+    color: var(--ink2);
+    max-width: 42ch;
+    margin-bottom: 2rem;
+    line-height: 1.75;
+  }
+  .hero-badges {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.5rem;
+  }
+  .badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+  .badge-green { background: #d8efe5; color: #1b5e40; }
+  .badge-blue { background: #dce8f5; color: #0f3158; }
+  .badge-red { background: #fbe8e4; color: #8b2e1a; }
+  .badge-gray { background: var(--paper2); color: var(--ink2); border: 1px solid var(--border); }
+
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 2px;
+    letter-spacing: 0.03em;
+    transition: all 0.18s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #a83a20; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+  .btn-outline:hover { background: var(--paper2); transform: translateY(-1px); }
+
+  .hero-right {
+    padding: 5rem 4rem 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .stat-row { display: flex; flex-direction: column; gap: 1.5rem; }
+  .stat-item { display: flex; gap: 1.5rem; align-items: flex-start; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--accent);
+    min-width: 72px;
+  }
+  .stat-label { font-size: 13px; color: var(--ink2); padding-top: 6px; }
+  .stat-sub { font-size: 12px; color: var(--ink3); margin-top: 2px; }
+
+  .available-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #d8efe5;
+    border: 1px solid #a8d9c0;
+    border-radius: 100px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: #1b5e40;
+    font-weight: 600;
+    width: fit-content;
+  }
+  .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: #2d6a4f;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 4rem; border-top: 1px solid var(--border); }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink3);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+  .skill-block {
+    background: var(--paper);
+    padding: 1.75rem;
+  }
+  .skill-block-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag {
+    font-size: 12px;
+    font-family: var(--mono);
+    padding: 4px 9px;
+    background: var(--paper2);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--ink2);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+  .project-card {
+    background: var(--paper);
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-card:hover { background: var(--paper2); }
+  .project-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink3);
+    letter-spacing: 0.08em;
+  }
+  .project-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .project-type {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+  .project-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.7; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 0.5rem; }
+  .stack-tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    padding: 3px 8px;
+    background: rgba(200,75,47,0.08);
+    color: var(--accent);
+    border-radius: 2px;
+  }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; color: var(--accent2);
+    text-decoration: none; margin-top: auto;
+    transition: gap 0.2s;
+  }
+  .project-link:hover { gap: 10px; }
+
+  /* EXPERIENCE */
+  .exp-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .exp-item:first-child { border-top: 1px solid var(--border); }
+  .exp-meta { }
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink3);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .exp-company {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .exp-loc { font-size: 12px; color: var(--ink3); }
+  .exp-role { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; color: var(--ink); margin-bottom: 0.75rem; }
+  .exp-points { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .exp-points li {
+    font-size: 13.5px;
+    color: var(--ink2);
+    line-height: 1.65;
+    padding-left: 16px;
+    position: relative;
+  }
+  .exp-points li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+  .edu-card {
+    background: var(--paper);
+    padding: 2.25rem;
+  }
+  .edu-degree {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
+  }
+  .edu-school { font-size: 14px; font-weight: 600; color: var(--accent2); margin-bottom: 0.25rem; }
+  .edu-detail { font-size: 12.5px; color: var(--ink3); font-family: var(--mono); margin-bottom: 1rem; }
+  .edu-courses { font-size: 12.5px; color: var(--ink2); line-height: 1.6; }
+
+  /* CERTS */
+  .cert-strip {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin-top: 3rem;
+  }
+  .cert-pill {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 18px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--paper);
+  }
+  .cert-icon { font-size: 18px; }
+  .cert-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .cert-issuer { font-size: 11px; color: var(--ink3); font-family: var(--mono); }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--ink);
+    color: var(--paper);
+    margin: 0 -4rem;
+    padding: 4rem;
+  }
+  .contact-section h2 { color: var(--paper); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
+  .contact-item { display: flex; flex-direction: column; gap: 4px; }
+  .contact-label { font-family: var(--mono); font-size: 10px; color: rgba(245,242,237,0.4); letter-spacing: 0.1em; text-transform: uppercase; }
+  .contact-val { font-size: 14px; color: var(--paper); text-decoration: none; }
+  .contact-val:hover { color: #f0a28a; }
+  .contact-note {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(245,242,237,0.15);
+    border-radius: 2px;
+    font-size: 13px;
+    color: rgba(245,242,237,0.65);
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy { font-family: var(--mono); font-size: 11px; color: var(--ink3); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 12px; color: var(--ink3); text-decoration: none; }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* SCROLL ANIMATION */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .revealed { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 800px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { border-top: 1px solid var(--border); padding: 3rem 2rem; }
+    .hero-left { padding: 4rem 2rem 2rem; }
+    section { padding: 4rem 2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.75rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-section { margin: 0 -2rem; padding: 3rem 2rem; }
+    footer { padding: 1.5rem 2rem; flex-direction: column; gap: 1rem; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">sneha.singh // portfolio</span>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="border-top: none; padding: 0;">
+  <div class="hero-left">
+    <div class="hero-tag">Open to internships — US Permanent Resident</div>
+    <h1>Sneha<br><em>Singh</em></h1>
+    <p class="hero-bio">
+      MS in Applied Data Intelligence at SJSU (GPA 3.66). I build scalable data pipelines, train ML models, and turn messy data into decisions that actually matter. 7+ years of industry experience across Mercedes-Benz R&amp;D and Wells Fargo.
+    </p>
+    <div class="hero-badges">
+      <span class="badge badge-blue">Data Engineering</span>
+      <span class="badge badge-red">AI / ML</span>
+      <span class="badge badge-green">Data Analytics</span>
+      <span class="badge badge-gray">No Sponsorship Needed</span>
+    </div>
+    <div class="hero-cta">
+      <a href="mailto:Sneha.subbu@gmail.com" class="btn btn-primary">✉ Get in touch</a>
+      <a href="https://github.com/Snehasingh-21" target="_blank" class="btn btn-outline">GitHub ↗</a>
+      <a href="https://linkedin.com/in/sneha-singh-70387a12" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="available-pill">
+      <span class="pulse"></span>
+      Actively seeking Summer 2025 internships
+    </div>
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="stat-num">7+</div>
+        <div>
+          <div class="stat-label">Years of industry experience</div>
+          <div class="stat-sub">Mercedes-Benz R&amp;D · Wells Fargo</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3.66</div>
+        <div>
+          <div class="stat-label">GPA at SJSU (MS)</div>
+          <div class="stat-sub">Applied Data Intelligence</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div>
+          <div class="stat-label">Professional certifications</div>
+          <div class="stat-sub">PMP · PSM I · PSPO I</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100k+</div>
+        <div>
+          <div class="stat-label">Health records processed</div>
+          <div class="stat-sub">Diabetes risk prediction project</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">02 — Technical Skills</div>
+  <h2>What I work with</h2>
+  <div class="skills-grid reveal">
+    <div class="skill-block">
+      <div class="skill-block-title">AI / Machine Learning</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Scikit-learn</span>
+        <span class="skill-tag">Random Forest</span>
+        <span class="skill-tag">Gradient Boosting</span>
+        <span class="skill-tag">KNN</span>
+        <span class="skill-tag">Prophet</span>
+        <span class="skill-tag">EDA</span>
+        <span class="skill-tag">Feature Engineering</span>
+        <span class="skill-tag">Cross-Validation</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Seaborn</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Data Engineering</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Apache Airflow</span>
+        <span class="skill-tag">PySpark</span>
+        <span class="skill-tag">dbt</span>
+        <span class="skill-tag">Snowflake</span>
+        <span class="skill-tag">ETL/ELT Pipelines</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">AWS</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Analytics & BI</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Preset BI</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Advanced Excel</span>
+        <span class="skill-tag">KPI Reporting</span>
+        <span class="skill-tag">Statistical Analysis</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Programming & DevOps</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">CI/CD</span>
+        <span class="skill-tag">Jenkins</span>
+        <span class="skill-tag">Selenium</span>
+        <span class="skill-tag">Agile / Scrum</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">03 — Academic Projects</div>
+  <h2>What I've built</h2>
+  <div class="projects-grid reveal">
+    <div class="project-card">
+      <div class="project-num">Project 01 — 2025</div>
+      <div class="project-type">Data Engineering + AI/ML</div>
+      <div class="project-title">Multi-Coin Crypto Analytics Pipeline</div>
+      <p class="project-desc">
+        Built a scalable ETL/ELT pipeline ingesting historical and real-time data for BTC, ETH, BNB, SOL, and ADA from CoinGecko into Snowflake. Orchestrated multi-step workflows with Airflow and dbt. Engineered technical indicators (MA7/MA30, RSI, Volatility), implemented 14-day forecasting with Prophet, and built a live multi-asset Preset BI dashboard.
+      </p>
+      <div class="project-stack">
+        <span class="stack-tag">Apache Airflow</span>
+        <span class="stack-tag">Snowflake</span>
+        <span class="stack-tag">dbt</span>
+        <span class="stack-tag">PySpark</span>
+        <span class="stack-tag">Prophet</span>
+        <span class="stack-tag">Docker</span>
+        <span class="stack-tag">Preset BI</span>
+      </div>
+      <a href="https://github.com/Snehasingh-21" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-num">Project 02 — 2025</div>
+      <div class="project-type">Machine Learning · Group Project</div>
+      <div class="project-title">Diabetes Risk Prediction & Health Indicator Modeling</div>
+      <p class="project-desc">
+        Cleaned and preprocessed 100,000+ health records — handled missing values and performed in-depth EDA to surface key risk factors. Trained and benchmarked Random Forest, Gradient Boosting, KNN, and Linear Regression models. Evaluated using RMSE and cross-validation; delivered visual insights to stakeholders.
+      </p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Scikit-learn</span>
+        <span class="stack-tag">Pandas</span>
+        <span class="stack-tag">Matplotlib</span>
+        <span class="stack-tag">Seaborn</span>
+        <span class="stack-tag">Statistical Modeling</span>
+      </div>
+      <a href="https://github.com/Snehasingh-21" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">04 — Work Experience</div>
+  <h2>Where I've worked</h2>
+  <div class="exp-list reveal">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">2020 — 2022</div>
+        <div class="exp-company">Mercedes-Benz R&amp;D</div>
+        <div class="exp-loc">Global Training Suite</div>
+      </div>
+      <div>
+        <div class="exp-role">Data Analytics &amp; Automation Consultant</div>
+        <ul class="exp-points">
+          <li>Cleaned and preprocessed large-scale datasets using Python and SQL; built cross-source ETL workflows to support analytics pipelines.</li>
+          <li>Built Tableau dashboards and KPI reports delivered directly to senior leadership, translating data into actionable business insights.</li>
+          <li>Automated data validation pipelines using Python; reduced production defects and improved reporting accuracy end-to-end.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">2015 — 2020</div>
+        <div class="exp-company">Mercedes-Benz R&amp;D</div>
+        <div class="exp-loc">Global Training Suite</div>
+      </div>
+      <div>
+        <div class="exp-role">QA Automation Engineer</div>
+        <ul class="exp-points">
+          <li>Built Python/Selenium automation frameworks; maintained CI/CD pipelines (Jenkins, Git) with cross-browser and API coverage in Agile/Scrum.</li>
+          <li>Collaborated with cross-functional teams; ranked backlogs by WIP and aging metrics; presented weekly status reports to leadership.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">2014 — 2015</div>
+        <div class="exp-company">Wells Fargo Bank</div>
+        <div class="exp-loc"></div>
+      </div>
+      <div>
+        <div class="exp-role">QA Automation Engineer</div>
+        <ul class="exp-points">
+          <li>Contributed to automated testing for banking applications, ensuring reliability and compliance across critical financial workflows.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">05 — Education</div>
+  <h2>Academic background</h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-degree">MS — Applied Data Intelligence</div>
+      <div class="edu-school">San Jose State University (SJSU)</div>
+      <div class="edu-detail">Aug 2025 – May 2027 · GPA: 3.66 / 4.0</div>
+      <div class="edu-courses">
+        Coursework: Big Data · Distributed Systems &amp; Agentic AI · Machine Learning · Statistical Modeling · Data Analytics
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">B.Tech — Information Technology</div>
+      <div class="edu-school">Rajasthan University</div>
+      <div class="edu-detail">2005 – 2009 · CGPA: 9.0 / 10</div>
+      <div class="edu-courses">
+        Strong foundation in systems, algorithms, and software engineering.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top: 3rem;">Certifications</div>
+  <div class="cert-strip reveal">
+    <div class="cert-pill">
+      <span class="cert-icon">🏅</span>
+      <div>
+        <div class="cert-name">PMP</div>
+        <div class="cert-issuer">Project Management Professional</div>
+      </div>
+    </div>
+    <div class="cert-pill">
+      <span class="cert-icon">🏅</span>
+      <div>
+        <div class="cert-name">PSM I</div>
+        <div class="cert-issuer">Professional Scrum Master</div>
+      </div>
+    </div>
+    <div class="cert-pill">
+      <span class="cert-icon">🏅</span>
+      <div>
+        <div class="cert-name">PSPO I</div>
+        <div class="cert-issuer">Professional Scrum Product Owner</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding-bottom: 0; border-top: 1px solid var(--border);">
+  <div class="contact-section">
+    <div class="section-label" style="color: rgba(245,242,237,0.4);">06 — Contact</div>
+    <h2>Let's work together</h2>
+    <div class="contact-grid">
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div class="contact-item">
+          <span class="contact-label">Email</span>
+          <a href="mailto:Sneha.subbu@gmail.com" class="contact-val">Sneha.subbu@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Phone</span>
+          <span class="contact-val">(510) 766-5745</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Location</span>
+          <span class="contact-val">San Jose, CA</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div class="contact-item">
+          <span class="contact-label">LinkedIn</span>
+          <a href="https://linkedin.com/in/sneha-singh-70387a12" target="_blank" class="contact-val">linkedin.com/in/sneha-singh-70387a12</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">GitHub</span>
+          <a href="https://github.com/Snehasingh-21" target="_blank" class="contact-val">github.com/Snehasingh-21</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Work authorization</span>
+          <span class="contact-val" style="color: #a8d9c0;">US Permanent Resident (Green Card) — No sponsorship required</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-note">
+      I'm actively seeking Summer/Fall 2025 internships in Data Engineering, ML Engineering, or Data Analytics. I bring industry experience, strong academic credentials, and no visa restrictions — happy to start a conversation anytime.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2025 Sneha Singh</span>
+  <div class="footer-links">
+    <a href="https://github.com/Snehasingh-21" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/sneha-singh-70387a12" target="_blank">LinkedIn</a>
+    <a href="mailto:Sneha.subbu@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
